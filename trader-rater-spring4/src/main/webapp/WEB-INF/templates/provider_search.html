@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	
+	<link rel="shortcut icon" th:href="@{/static/image/favicon/favicon.ico}"
+		href="../../static/image/favicon/favicon.ico" />
+	
+	<title>Trader Rater</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet"
+		th:href="@{/static/bootstrap/css/bootstrap.min.css}"
+		href="../../static/bootstrap/css/bootstrap.min.css" />
+		
+	<script type="text/javascript">
+	var netthreads = {
+		retrieveSolutionTypes : function(selectUrl) {
+		    
+		    if ($('#providertype').val() != '') {
+		        selectUrl = selectUrl + $('#providertype').val();
+		    }
+
+			$.ajax({
+			  url: selectUrl,
+			  dataType: "json",
+			  success: function(data) {
+			    var name, select, option;
+			
+			    // Get the raw DOM object for the select box
+			    select = document.getElementById('solutionType');
+			
+			    // Clear the old options
+			    select.options.length = 0;
+			
+			    // Load the new options
+			    for (item in data) {
+			      if (data.hasOwnProperty(item)) {
+			        select.options.add(new Option(data[item]["title"], data[item]["title"]));
+			      }
+			    }
+			  }
+			});
+		}	
+	};
+	
+	</script>
+</head>
+
+<body>
+
+	<div th:include="header :: default">
+
+		<div class="navbar navbar-inverse" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" th:href="@{/}" href="./provider_index.html"
+						th:text="#{header.title}">Trader Rater</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<div class="navbar-form navbar-right" role="form">
+						<a class="btn btn-default" th:href="@{/login_info}"
+							href="./login_info.html" role="button" th:text="#{header.login}">Login.</a>
+					</div>
+				</div>
+				<!--/.navbar-collapse -->
+			</div>
+		</div>
+
+	</div>
+
+	<div class="container">
+
+		<div class="row">
+			You must be registered to submit a job. Not Registered, register <a href="#" th:href="@{/client_register}">here</a>
+				
+			<div class="col-md-10">
+				<h2>Search.</h2>
+				<h3>Find a tradesman near you.</h3>
+			</div>
+		</div>
+
+		<!-- Example row of columns -->
+
+		<div class="form-group">
+			<form class="form-horizontal" role="form" action="#" th:object="${search}" th:action="@{/search_provider}">
+				<fieldset>
+					<div class="form-group">
+						<div class="col-sm-10">
+							<label class="control-label" for="providertype" th:text="#{provider.type}">Tradesman Type</label> 
+							<select id="providertype" class="form-control" th:attr="onchange='javascript:netthreads.retrieveSolutionTypes(\''+@{/provider_select_type}+'/\');'">
+								<option th:text="#{solution.type.select}">-- Select --</option>
+								<option th:remove="all">Builder</option>
+								<option th:remove="all">Joiner</option>
+								<option th:each="name : ${solutionTypes}" th:value="${name.title}" th:text="${name.title}"/>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-10">
+							<label class="control-label" for="solutionType" th:text="#{solution.type}">Job Type</label> 
+							<select id="solutionType" class="form-control">
+								<option th:text="#{solution.task.type.select}">-- Select A Job Type--</option>
+								<option th:remove="all">Bathroom fitting</option>
+								<option th:remove="all">Kitchen fitting</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-10">
+							<label class="control-label" for="description" th:text="#{provider.service.search.description}">Job Description</label>
+							<textarea  
+							    rows="5"
+								th:errorclass="has-error" 
+								class="form-control" 
+								th:field="*{description}" 
+								id="description]" 
+								name="description"
+								placeholder="Enter Description">
+							</textarea>
+							<p th:if="${#fields.hasErrors('description')}" class="help-block" th:errors="*{description}">Please provide a description.</p>
+						</div>
+						
+						<div class="col-sm-5">
+							<label class="control-label" th:text="#{client.postcode}">Postcode</label>
+							<input type="text" class="form-control"  placeholder="Post code" th:field="*{postCode}"/>
+							<p th:if="${#fields.hasErrors('postCode')}" class="help-block" th:errors="*{description}">Please </p>
+						</div>
+						
+					</div>
+				</fieldset>
+			</form>
+		</div>
+
+		<p>
+			<button class="btn btn-primary btn-lg" type="submit" name="submit" th:text="#{provider.search.post}">Post</button>
+		</p>
+
+	</div>
+
+
+	<hr />
+
+	<div id="footer">
+		<div class="container">
+			<div th:include="footer :: copyright">© NetThreads 2014</div>
+		</div>
+	</div>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script th:src="@{/static/jumbotron/js/jquery.min.js}"
+		src="../../static/jumbotron/js/jquery.min.js"></script>
+	<script th:src="@{/static/bootstrap/js/bootstrap.min.js}"
+		src="../../static/bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

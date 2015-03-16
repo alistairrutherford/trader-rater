@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<link rel="shortcut icon" th:href="@{/static/image/favicon/favicon.ico}"
+	href="../../static/image/favicon/favicon.ico" />
+
+<title>Trader Rater</title>
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	th:href="@{/static/bootstrap/css/bootstrap.min.css}"
+	href="../../static/bootstrap/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+
+	<div th:include="header :: default">
+
+		<div class="navbar navbar-inverse" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" th:href="@{/}" href="./provider_index.html"
+						th:text="#{header.title}">Trader Rater</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<div class="navbar-form navbar-right" role="form">
+						<a class="btn btn-default" th:href="@{/login_info}"
+							href="./login_info.html" role="button" th:text="#{header.login}">Login.</a>
+					</div>
+				</div>
+				<!--/.navbar-collapse -->
+			</div>
+		</div>
+
+	</div>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-10">
+				<h2 th:text="#{provider.register.title}">Register as a tradesman.</h2>
+			</div>
+		</div>
+
+		<p>Looking for work. Sign up here, it's free.</p>
+
+		<div class="form-group">
+			<form class="form-horizontal" role="form" action="#" th:object="${provider}" th:action="@{/provider_register}" method="POST">
+				<fieldset>
+					<div class="form-group">
+						<div class="col-sm-10">
+							<label class="control-label" th:text="#{provider.company.name}">Company
+								Name</label> <input type="text" class="form-control"
+								placeholder="Company Name" th:field="*{businessTitle}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-5" th:text="#{provider.primary.contact}">
+							<b>Enter the first and last name of the primary contact in
+								your business.</b>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-5">
+							<label class="control-label" th:text="#{provider.first.name}">First
+								Name</label> <input type="text" class="form-control"
+								placeholder="First Name" th:field="*{userDetails.firstName}" />
+						</div>
+						<div class="col-sm-5">
+							<label class="control-label" th:text="#{provider.last.name}">Last
+								Name</label> <input type="text" class="form-control"
+								placeholder="Last Name" th:field="*{userDetails.lastName}" />
+						</div>
+						<div class="col-sm-10">
+							<label class="control-label" th:text="#{provider.address}">Company
+								Address</label>
+
+							<textarea rows="3" placeholder="Address"
+								class="form-control" th:field="*{userDetails.address}"></textarea>
+
+						</div>
+						<div class="col-sm-5">
+							<label class="control-label" th:text="#{provider.postcode}">Postcode</label>
+							<input type="text" class="form-control" placeholder="Post code"
+								th:field="*{userDetails.postCode}" />
+						</div>
+						<div class="col-sm-5">
+							<label class="control-label" th:text="#{provider.email}">Email</label>
+							<input type="email" class="form-control" placeholder="Email"
+								th:field="*{userDetails.email}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-5">
+							<label class="control-label" th:text="#{provider.password}">Password</label>
+							<input type="password" class="form-control"
+								placeholder="Enter password" th:field="*{userDetails.password}" />
+						</div>
+						<div class="col-sm-5">
+							<label class="control-label"
+								th:text="#{provider.repeat.password}">Repeat Password</label> 
+								<input type="password" class="form-control"
+								placeholder="Enter in password again" th:field="*{userDetails.passwordRepeat}" />
+						</div>
+					</div>
+
+					<p>
+						<button class="btn btn-primary btn-lg" type="submit"
+							name="register" th:text="#{provider.register}">Register!</button>
+					</p>
+				</fieldset>
+			</form>
+
+		</div>
+
+	</div>
+
+	<!-- /container -->
+
+	<div id="footer">
+		<div class="container">
+			<div th:include="footer :: copyright">© NetThreads 2014</div>
+		</div>
+	</div>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script th:src="@{/static/jumbotron/js/jquery.min.js}"
+		src="../../static/jumbotron/js/jquery.min.js"></script>
+	<script th:src="@{/static/bootstrap/js/bootstrap.min.js}"
+		src="../../static/bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
