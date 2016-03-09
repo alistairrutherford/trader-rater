@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.netthreads.trader.domain.Client;
-import com.netthreads.trader.domain.Provider;
 
 /**
  * View controller.
@@ -30,6 +29,11 @@ public class ClientRegisterController
 	
 	// -------------------------------------------------------------------
 	// -------------------------------------------------------------------
+	
+	/**
+	 * Create blank model.
+	 * 
+	 */
 	@ModelAttribute(MODEL_ATTR_CLIENT)
 	private Client prepareClientModel()
 	{
@@ -58,9 +62,9 @@ public class ClientRegisterController
 	 * @return The view.
 	 */
 	@RequestMapping(value = INDEX_VIEW_MAPPING, method = RequestMethod.POST)
-	public String insertProvider(Provider provider, Model model) 
+	public String insertClient(Client client, Model model) 
 	{
-	    // TODO Add provider
+	    // TODO Add client
 	    
 	    return REGISTERED_VIEW_URL;
 	}
