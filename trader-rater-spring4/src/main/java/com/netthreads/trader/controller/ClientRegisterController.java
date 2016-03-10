@@ -64,7 +64,11 @@ public class ClientRegisterController
 	@RequestMapping(value = INDEX_VIEW_MAPPING, method = RequestMethod.POST)
 	public String insertClient(Client client, Model model) 
 	{
-	    // TODO Add client
+	    // TODO Validate
+		
+		// TODO Save user if valid.
+		
+		// TODO Navigate to registered page.
 	    
 	    return REGISTERED_VIEW_URL;
 	}
