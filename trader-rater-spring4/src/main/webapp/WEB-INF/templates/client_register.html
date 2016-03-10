@@ -59,7 +59,8 @@
 						<div class="col-sm-5">
 							<label class="control-label" th:text="#{client.first.name}">First Name</label>
 							<input type="text" class="form-control"
-								placeholder="First Name" th:field="*{userDetails.firstName}"/>
+								placeholder="First Name" th:field="*{userDetails.firstName}"
+								th:errorclass="fieldError"/>
 						</div>
 						<div class="col-sm-5">
 							<label class="control-label" th:text="#{client.last.name}">Last Name</label>
